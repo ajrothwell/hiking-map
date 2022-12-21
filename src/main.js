@@ -38,7 +38,7 @@ const customComps = {
   // 'customGreeting': customGreeting,
 };
 
-import '@creativebulma/bulma-tooltip/dist/bulma-tooltip.min.css'
+import '@creativebulma/bulma-tooltip/dist/bulma-tooltip.min.css';
 
 pinboard({
   alerts: {
@@ -186,8 +186,7 @@ pinboard({
     minZoom: 11,
     maxZoom: 25,
     shouldInitialize: true,
-
-    zoom: 9,
+    zoom: 12,
     geocodeZoom: 15,
     imagery: {
       enabled: false,
