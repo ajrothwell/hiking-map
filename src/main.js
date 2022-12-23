@@ -23,7 +23,11 @@ import { faCar } from '@fortawesome/free-solid-svg-icons/faCar';
 import { faCheckSquare } from '@fortawesome/free-regular-svg-icons/faCheckSquare';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import { faSquare } from '@fortawesome/free-regular-svg-icons/faSquare';
-library.add(faExclamationTriangle, faCalendarAlt, faBuilding, faUserMd, faCircle, faCar, faCheckSquare, faSquare, faCheck);
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons/faArrowRight';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
+
+
+library.add(faExclamationTriangle, faCalendarAlt, faBuilding, faUserMd, faCircle, faCar, faCheckSquare, faSquare, faCheck, faArrowRight, faArrowLeft);
 
 // import pinboard
 import pinboard from '@phila/pinboard/src/main.js';

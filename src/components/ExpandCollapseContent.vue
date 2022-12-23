@@ -1,282 +1,63 @@
 <template>
   <div class="main-content">
     <div>
-      Date: {{ item.fields.Date }}<br>
+      <!-- Date: {{ item.fields.Date }}<br> -->
       Town/City: {{ item.fields.Town }}<br>
       State: {{ item.fields.State }}
     </div>
-    <div
-      v-if="item.fields.Attachments"
-      class="img-div"
-    >
-      <img :src="item.fields.Attachments[0].url">
-    </div>
-    <div
-      v-if="!item.fields.Attachments"
-    >
-      No photo
-    </div>
-    <!-- <div>
-      {{ item.fields.Name }}
-    </div> -->
-    <!-- <div class="columns">
-      <div class="column">
-        <div
-          v-if="item.attributes.ADDRESS"
-          class="columns is-mobile"
+    <div class="columns is-vcentered">
+      <div class="column is-2 has-text-centered">
+        <button
+          v-show="photoNumber+1>1"
+          class="button"
+          @click="changePhotoNumber('down')"
         >
-          <div class="column is-1">
-            <font-awesome-icon icon="map-marker-alt" />
-          </div>
-          <div class="column">
-            {{ item.attributes.ADDRESS }}<br>
-            Philadelphia, PA {{ item.attributes.ZIP_CODE }}<br>
-          </div>
-        </div>
-
-        <div
-          v-if="item.attributes.WEBSITE"
-          class="columns is-mobile"
-        >
-          <div class="column is-1">
-            <font-awesome-icon icon="globe" />
-          </div>
-          <div class="column">
-            <a
-              target="_blank"
-              :href="item.attributes.WEBSITE"
-            >{{ $t('website') }}</a>
-          </div>
-        </div>
-        <div
-          v-if="item.attributes.OFFICE_PHONE_NUM"
-          class="columns is-mobile"
-        >
-          <div class="column is-1">
-            <font-awesome-icon icon="phone" />
-          </div>
-          <div class="column">
-            {{ item.attributes.OFFICE_PHONE_NUM }}
-          </div>
-        </div>
+          <font-awesome-icon icon="arrow-left" />
+        </button>
       </div>
-
-      <div class="column">
-        <div class="columns is-mobile">
-          <div
-            class="column is-1"
-          >
-            <font-awesome-icon icon="car-bus" />
-          </div>
-          <div class="column">
-            <div>{{ item.attributes.PARKING_TRANSIT }}</div>
-
-          </div>
+      <div
+        v-if="picsLength"
+        class="column is-8 has-text-centered"
+      >
+        <!-- <img :src="pictures[photoNumber].url"> -->
+        <div
+          class="image-div"
+        >
+          <img :src="imgsrc">
         </div>
-
+        Date: {{ pictures[photoNumber].date }}
       </div>
-    </div> -->
-
-    <!-- <h3>{{ $t('ageSpecificServices') }}</h3>
-
-    <vue-good-table
-      :columns="ageSpecificServices.columns"
-      :rows="ageSpecificServices.rows"
-      :sort-options="{ enabled: false }"
-      styleClass="vgt-table condensed"
-    >
-      <template slot="table-column" slot-scope="props">
-        <span
-          v-if="props.column.label =='Service'"
-          class="table-header-text"
+      <div
+        v-if="!picsLength"
+        class="column is-8 has-text-centered"
+      >
+        No photos
+      </div>
+      <div class="column is-2 has-text-centered">
+        <button
+          v-show="picsLength && photoNumber+1<picsLength"
+          class="button"
+          @click="changePhotoNumber('up')"
         >
-          {{ $t(props.column.i18nLabel) }}
-        </span>
-        <div
-          v-if="props.column.label =='Adult'"
-          class="center table-header-text"
-        >
-          {{ $t(props.column.i18nLabel) }}
-        </div>
-        <div
-          v-if="props.column.label =='Child'"
-          class="center table-header-text"
-        >
-          {{ $t(props.column.i18nLabel) }}
-        </div>
-        <div
-          v-if="props.column.label =='Existing'"
-          class="center table-header-text"
-        >
-          {{ $t(props.column.i18nLabel) }}
-        </div>
-      </template>
-
-      <template slot="table-row" slot-scope="props">
-        <span
-          v-if="props.column.field == 'service'"
-          class="table-text"
-        >
-          {{ $t(props.row.service) }}
-        </span>
-        <div
-          v-if="props.column.field == 'adult'"
-          class="center"
-        >
-          <font-awesome-icon
-            v-if="['Yes', 'Established Patients'].includes(props.row.adult)"
-            :icon="['fa', 'check']"
-          />
-        </div>
-        <div
-          v-if="props.column.field == 'child'"
-          class="center"
-        >
-          <font-awesome-icon
-            v-if="['Yes', 'Established Patients'].includes(props.row.child)"
-            :icon="['fa', 'check']"
-          />
-        </div>
-        <div
-          v-if="props.column.field == 'existing'"
-          class="center"
-        >
-          <font-awesome-icon
-            v-if="props.row.existing.includes('Established Patients')"
-            :icon="['fa', 'check']"
-          />
-        </div>
-      </template>
-    </vue-good-table>
-
-    <h3 class="section-heading">{{ $t('otherServices') }}</h3>
-    <vue-good-table
-      :columns="otherServices.columns"
-      :rows="otherServices.rows"
-      :sort-options="{ enabled: false }"
-      styleClass="vgt-table condensed"
-    >
-      <template slot="table-column" slot-scope="props">
-        <span
-          v-if="props.column.label =='Service'"
-          class="table-header-text"
-        >
-          {{ $t(props.column.i18nLabel) }}
-        </span>
-        <div
-          v-if="props.column.label =='All'"
-          class="center table-header-text"
-        >
-          {{ $t(props.column.i18nLabel) }}
-        </div>
-        <div
-          v-if="props.column.label =='Existing'"
-          class="center table-header-text"
-        >
-          {{ $t(props.column.i18nLabel) }}
-        </div>
-      </template>
-
-      <template slot="table-row" slot-scope="props">
-        <span
-          v-if="props.column.field == 'service'"
-          class="table-text"
-        >
-          {{ $t(props.row.service) }}
-        </span>
-        <div
-          v-if="props.column.field == 'all'"
-          class="center"
-        >
-          <font-awesome-icon
-            v-if="props.row.value == 'Yes'"
-            :icon="['fa', 'check']"
-          />
-        </div>
-        <div
-          v-if="props.column.field == 'existing'"
-          class="center"
-        >
-          <font-awesome-icon
-            v-if="['Yes', 'Established Patients'].includes(props.row.value)"
-            :icon="['fa', 'check']"
-          />
-        </div>
-      </template>
-    </vue-good-table>
-
-    <h3 class="section-heading">{{ $t('hours') }}</h3>
-    <vue-good-table
-      :columns="hours.columns"
-      :rows="hours.rows"
-      :sort-options="{ enabled: false }"
-      styleClass="vgt-table condensed"
-    >
-      <template slot="table-column" slot-scope="props">
-        <span
-          v-if="props.column.label =='Days'"
-          class="table-header-text"
-        >
-          {{ $t(props.column.i18nLabel) }}
-        </span>
-        <span
-          v-if="props.column.label =='Schedule'"
-          class="table-header-text"
-        >
-          {{ $t(props.column.i18nLabel) }}
-        </span>
-      </template>
-
-      <template slot="table-row" slot-scope="props">
-        <span
-          v-if="props.column.field == 'days'"
-          class="table-text"
-        >
-          {{ $t(props.row.days) }}
-        </span>
-        <div
-          v-if="props.column.field == 'schedule'"
-          class="table-text"
-        >
-          {{ props.row.schedule }}
-        </div>
-      </template>
-    </vue-good-table>
-
-    <h3 class="section-heading">{{ $t( 'tests.category' ) }}</h3>
-    <span
-      v-for="(type, index) of tests"
-      :key="'test-'+index"
-    >
-      {{ $t('tests[\'' + type.toLowerCase() + '\']') }}<span v-if="index<tests.length-1">, </span>
-    </span>
-
-    <h3 class="section-heading">{{ $t( 'slidingScale' ) }}</h3>
-    <div>
+          <font-awesome-icon icon="arrow-right" />
+        </button>
+      </div>
     </div>
-
-    <h3 class="section-heading">{{ $t( 'languages.languagesSpoken' ) }}</h3>
-    <span
-      v-for="(language, index) of languagesSpoken"
-      :key="'lang-'+index"
-    >
-      {{ $t('languages[\'' + language.toLowerCase() + '\']') }}<span v-if="index<languagesSpoken.length-1">, </span>
-    </span> -->
   </div>
 </template>
 
 <script>
 
-import SharedFunctions from './mixins/SharedFunctions.vue';
-import { VueGoodTable } from 'vue-good-table';
-import 'vue-good-table/dist/vue-good-table.css';
+// import SharedFunctions from './mixins/SharedFunctions.vue';
+// import { VueGoodTable } from 'vue-good-table';
+// import 'vue-good-table/dist/vue-good-table.css';
 
 export default {
   name: 'ExpandCollapseContent',
   components: {
-    VueGoodTable,
+    // VueGoodTable,
   },
-  mixins: [ SharedFunctions ],
+  // mixins: [ SharedFunctions ],
   props: {
     item: {
       type: Object,
@@ -285,15 +66,79 @@ export default {
       },
     },
   },
-  computed: {
-
+  data() {
+    return {
+      photoNumber: 0,
+      imgsrc: null,
+    };
   },
-  // methods: {
-  //   parseAddress(address) {
-  //     const formattedAddress = address.replace(/(Phila.+)/g, city => `<div>${city}</div>`).replace(/^\d+\s[A-z]+\s[A-z]+/g, lineOne => `<div>${lineOne}</div>`).replace(/,/, '');
-  //     return formattedAddress;
-  //   },
-  // },
+  computed: {
+    pictures() {
+      let pics = [];
+      let pics1 = this.item.fields.Date1Pics;
+      console.log('pictures computed, pics1:', pics1);
+      let pics2 = this.item.fields.Date2Pics;
+      console.log('pictures computed, pics2:', pics2);
+
+      if (pics1 && pics2) {
+        for (let pic1 of pics1) {
+          pic1.date = this.item.fields.Date1;
+        }
+        for (let pic2 of pics2) {
+          pic2.date = this.item.fields.Date2;
+        }
+        pics = pics1.concat(pics2);
+      } else if (pics1) {
+        for (let pic1 of pics1) {
+          pic1.date = this.item.fields.Date1;
+        }
+        pics = pics1;
+      }
+      return pics;
+    },
+    picsLength() {
+      return this.pictures.length;
+    },
+    // currentPic() {
+    //   // let imgsrc;
+      
+    // },
+  },
+  watch: {
+    photoNumber(nextPhotoNumber) {
+      // console.log('watch photoNumber, nextPhotoNumber:', nextPhotoNumber);
+      this.imgsrc = './images/spinner2.PNG';
+      let myImage = new Image();
+      myImage.src = this.pictures[this.photoNumber].url;
+      myImage.onload = () => {
+        this.imgsrc = myImage.src;
+      };
+    },
+  },
+  mounted() {
+    this.imgsrc = './images/spinner2.PNG';
+    let myImage = new Image();
+    myImage.src = this.pictures[this.photoNumber].url;
+    myImage.onload = () => {
+      this.imgsrc = myImage.src;
+    };
+  },
+  methods: {
+    changePhotoNumber(direction) {
+      console.log('changePhotoNumber, direction:', direction);
+      let newNumber;
+      if (direction == 'up') {
+        newNumber = this.photoNumber + 1;
+      } else if (direction == 'down') {
+        newNumber = this.photoNumber - 1;
+      }
+      this.photoNumber = newNumber;
+    },
+    // parseAddress(address) {
+    //   const formattedAddress = address.replace(/(Phila.+)/g, city => `<div>${city}</div>`).replace(/^\d+\s[A-z]+\s[A-z]+/g, lineOne => `<div>${lineOne}</div>`).replace(/,/, '');
+    //   return formattedAddress;
+    // },
+  },
 };
 
 </script>
@@ -305,12 +150,16 @@ table {
   border-style: none !important;
 }
 
-.img-div {
-  padding-left: 100px;
-  padding-right: 100px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+.image-div {
+  min-height: 540px;
 }
+
+// .img-div {
+//   padding-left: 100px;
+//   padding-right: 100px;
+//   padding-top: 10px;
+//   padding-bottom: 10px;
+// }
 
 // .vgt-table.bordered td, .vgt-table.bordered th {
 //   border: 0px none #dcdfe6;
