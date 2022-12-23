@@ -116,7 +116,7 @@ pinboard({
     type: 'categoryField_array',
     columns: false,
     value: function(item) {
-      return item.fields.type;
+      return item.fields.State;
     },
   },
   markerType: 'circle-marker',
@@ -183,10 +183,10 @@ pinboard({
     containerClass: 'map-container',
     defaultBasemap: 'pwd',
     center: [ -75.163471, 39.953338 ],
-    minZoom: 11,
+    minZoom: 7,
     maxZoom: 25,
     shouldInitialize: true,
-    zoom: 12,
+    zoom: 7,
     geocodeZoom: 15,
     imagery: {
       enabled: false,

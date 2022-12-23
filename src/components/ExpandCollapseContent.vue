@@ -2,7 +2,8 @@
   <div class="main-content">
     <div>
       Date: {{ item.fields.Date }}<br>
-      Type: {{ item.fields.type }}
+      Town/City: {{ item.fields.Town }}<br>
+      State: {{ item.fields.State }}
     </div>
     <div
       v-if="item.fields.Attachments"
@@ -261,7 +262,6 @@
     >
       {{ $t('languages[\'' + language.toLowerCase() + '\']') }}<span v-if="index<languagesSpoken.length-1">, </span>
     </span> -->
-
   </div>
 </template>
 
@@ -269,7 +269,7 @@
 
 import SharedFunctions from './mixins/SharedFunctions.vue';
 import { VueGoodTable } from 'vue-good-table';
-import 'vue-good-table/dist/vue-good-table.css'
+import 'vue-good-table/dist/vue-good-table.css';
 
 export default {
   name: 'ExpandCollapseContent',
