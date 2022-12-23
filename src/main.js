@@ -121,7 +121,8 @@ pinboard({
   },
   markerType: 'circle-marker',
   circleMarkers:{
-    color: '#FF0000',
+    color: '#ff781f',
+    selectedColor: '#FF0000',
     weight: 0,
     radius: 8,
     mobileRadius: 12,
