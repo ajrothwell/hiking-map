@@ -79,7 +79,7 @@ pinboard({
     ],
   },
   app: {
-    title: 'Fun Hikes',
+    title: 'Outdoor Places',
     logoAlt: 'logo',
     type: 'hikes',
     trustedSite: 'hidden',
@@ -89,6 +89,7 @@ pinboard({
   retractableRefine: false,
   dropdownRefine: false,
   searchBar: {
+    hide: true,
     placeholder: 'Search by address',
     searchTypes: [ 'address' ],
     labelText:  {

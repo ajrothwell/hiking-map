@@ -5,11 +5,11 @@
       Town/City: {{ item.fields.Town }}<br>
       State: {{ item.fields.State }}
     </div>
-    <div class="columns is-vcentered">
+    <div class="columns is-vcentered is-mobile">
       <div class="column is-2 has-text-centered">
         <button
           v-show="photoNumber+1>1"
-          class="button"
+          class="button square-button"
           @click="changePhotoNumber('down')"
         >
           <font-awesome-icon icon="arrow-left" />
@@ -36,7 +36,7 @@
       <div class="column is-2 has-text-centered">
         <button
           v-show="picsLength && photoNumber+1<picsLength"
-          class="button"
+          class="button square-button"
           @click="changePhotoNumber('up')"
         >
           <font-awesome-icon icon="arrow-right" />
@@ -48,16 +48,10 @@
 
 <script>
 
-// import SharedFunctions from './mixins/SharedFunctions.vue';
-// import { VueGoodTable } from 'vue-good-table';
-// import 'vue-good-table/dist/vue-good-table.css';
-
 export default {
   name: 'ExpandCollapseContent',
   components: {
-    // VueGoodTable,
   },
-  // mixins: [ SharedFunctions ],
   props: {
     item: {
       type: Object,
@@ -73,11 +67,32 @@ export default {
     };
   },
   computed: {
+    allPics() {
+      let allPics = {};
+      for (let i=0; i<10; i++) {
+        if (this.item.fields['Date'+i]) {
+          this.item.fields['PicsDate'+i]['date'] = this.item.fields['Date'+i];
+          allPics[this.item.fields['Date'+i]] = this.item.fields['PicsDate'+i];
+        }
+      }
+      return allPics;
+    },
+    pictures2() {
+      let pictures = [];
+      for (let pics of Object.entries(this.allPics)) {
+        for (let pic of pics) {
+          pictures.push(pic);
+        }
+        console.log('in pictures2, pics:', pics);
+      }
+      return pictures;
+    },
     pictures() {
       let pics = [];
-      let pics1 = this.item.fields.Date1Pics;
+
+      let pics1 = this.item.fields.PicsDate1;
       console.log('pictures computed, pics1:', pics1);
-      let pics2 = this.item.fields.Date2Pics;
+      let pics2 = this.item.fields.PicsDate2;
       console.log('pictures computed, pics2:', pics2);
 
       if (pics1 && pics2) {
@@ -99,15 +114,11 @@ export default {
     picsLength() {
       return this.pictures.length;
     },
-    // currentPic() {
-    //   // let imgsrc;
-      
-    // },
   },
   watch: {
     photoNumber(nextPhotoNumber) {
       // console.log('watch photoNumber, nextPhotoNumber:', nextPhotoNumber);
-      this.imgsrc = './images/spinner2.PNG';
+      this.imgsrc = './images/spinner3.png';
       let myImage = new Image();
       myImage.src = this.pictures[this.photoNumber].url;
       myImage.onload = () => {
@@ -116,7 +127,7 @@ export default {
     },
   },
   mounted() {
-    this.imgsrc = './images/spinner2.PNG';
+    this.imgsrc = './images/spinner3.png';
     let myImage = new Image();
     myImage.src = this.pictures[this.photoNumber].url;
     myImage.onload = () => {
@@ -134,10 +145,6 @@ export default {
       }
       this.photoNumber = newNumber;
     },
-    // parseAddress(address) {
-    //   const formattedAddress = address.replace(/(Phila.+)/g, city => `<div>${city}</div>`).replace(/^\d+\s[A-z]+\s[A-z]+/g, lineOne => `<div>${lineOne}</div>`).replace(/,/, '');
-    //   return formattedAddress;
-    // },
   },
 };
 
@@ -150,95 +157,71 @@ table {
   border-style: none !important;
 }
 
+.square-button {
+  width: 46px;
+}
+
 .image-div {
-  min-height: 540px;
+  // min-height: 540px;
 }
 
-// .img-div {
-//   padding-left: 100px;
-//   padding-right: 100px;
-//   padding-top: 10px;
-//   padding-bottom: 10px;
+// th {
+//   background: #ffffff !important;
 // }
-
-// .vgt-table.bordered td, .vgt-table.bordered th {
-//   border: 0px none #dcdfe6;
+//
+// tr:nth-child(odd) {
+//   background: #eee;
 // }
-
-// th, td {
-//   padding-top: 7px !important;
-//   padding-bottom: 7px !important;
+//
+// .center {
+//   text-align: center;
 // }
-
-.vgt-responsive {
-  // overflow-x: hidden;
-}
-
-th {
-  background: #ffffff !important;
-}
-
-tr:nth-child(odd) {
-  background: #eee;
-}
-
-.center {
-  text-align: center;
-}
-
-.table-text {
-  font-family: "OpenSans-Regular", "Open Sans", sans-serif;
-  font-size: 14px;
-}
-
-.table-header-text {
-  font-family: "OpenSans-SemiBold", "Open Sans SemiBold", "Open Sans", sans-serif;
-  font-size: 14px;
-}
-
-h3 {
-  font-family: "Montserrat-SemiBold", "Montserrat SemiBold", "Montserrat", sans-serif;
-  font-weight: 650;
-  font-size: 24px;
-  padding-top: 14px;
-  padding-bottom: 14px;
-}
-
-.section-heading {
-  margin-top: 14px;
-}
-
-// .table-title {
+//
+// .table-text {
+//   font-family: "OpenSans-Regular", "Open Sans", sans-serif;
+//   font-size: 14px;
+// }
+//
+// .table-header-text {
+//   font-family: "OpenSans-SemiBold", "Open Sans SemiBold", "Open Sans", sans-serif;
+//   font-size: 14px;
+// }
+//
+// h3 {
 //   font-family: "Montserrat-SemiBold", "Montserrat SemiBold", "Montserrat", sans-serif;
 //   font-weight: 650;
 //   font-size: 24px;
 //   padding-top: 14px;
 //   padding-bottom: 14px;
 // }
-
-.no-wrap {
-  white-space: nowrap;
-}
-
-.no-margins {
-  margin: 0px;
-  margin-bottom: 0px !important;
-}
-
-.top-margins {
-  margin-top: 10px;
-}
-
-.main-content {
-  font-size: 14px,
-}
-
-.td-style {
-  font-size: 14px !important;
-}
-
-.td-textbox {
-  padding-left: 2rem;
-}
+//
+// .section-heading {
+//   margin-top: 14px;
+// }
+//
+// .no-wrap {
+//   white-space: nowrap;
+// }
+//
+// .no-margins {
+//   margin: 0px;
+//   margin-bottom: 0px !important;
+// }
+//
+// .top-margins {
+//   margin-top: 10px;
+// }
+//
+// .main-content {
+//   font-size: 14px,
+// }
+//
+// .td-style {
+//   font-size: 14px !important;
+// }
+//
+// .td-textbox {
+//   padding-left: 2rem;
+// }
 
 </style>
