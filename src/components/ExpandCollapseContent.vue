@@ -1,7 +1,6 @@
 <template>
   <div class="main-content">
     <div>
-      <!-- Date: {{ item.fields.Date }}<br> -->
       Town/City: {{ item.fields.Town }}<br>
       State: {{ item.fields.State }}
     </div>
@@ -19,13 +18,12 @@
         v-if="picsLength"
         class="column is-8 has-text-centered"
       >
-        <!-- <img :src="pictures[photoNumber].url"> -->
         <div
           class="image-div"
         >
           <img :src="imgsrc">
         </div>
-        Date: {{ pictures[photoNumber].date }}
+        Date: {{ photoDate }}
       </div>
       <div
         v-if="!picsLength"
@@ -63,6 +61,7 @@ export default {
   data() {
     return {
       photoNumber: 0,
+      photoDate: null,
       imgsrc: null,
     };
   },
@@ -77,39 +76,17 @@ export default {
       }
       return allPics;
     },
-    pictures2() {
+    pictures() {
       let pictures = [];
-      for (let pics of Object.entries(this.allPics)) {
-        for (let pic of pics) {
+      for (let pics of Object.keys(this.allPics)) {
+        // console.log('in pictures, pics:', pics);
+        for (let pic of this.allPics[pics]) {
+          console.log('in pictures, this.allPics[pics]:', this.allPics[pics], 'pic:', pic);
+          pic.date = pics;
           pictures.push(pic);
         }
-        console.log('in pictures2, pics:', pics);
       }
       return pictures;
-    },
-    pictures() {
-      let pics = [];
-
-      let pics1 = this.item.fields.PicsDate1;
-      console.log('pictures computed, pics1:', pics1);
-      let pics2 = this.item.fields.PicsDate2;
-      console.log('pictures computed, pics2:', pics2);
-
-      if (pics1 && pics2) {
-        for (let pic1 of pics1) {
-          pic1.date = this.item.fields.Date1;
-        }
-        for (let pic2 of pics2) {
-          pic2.date = this.item.fields.Date2;
-        }
-        pics = pics1.concat(pics2);
-      } else if (pics1) {
-        for (let pic1 of pics1) {
-          pic1.date = this.item.fields.Date1;
-        }
-        pics = pics1;
-      }
-      return pics;
     },
     picsLength() {
       return this.pictures.length;
@@ -117,16 +94,18 @@ export default {
   },
   watch: {
     photoNumber(nextPhotoNumber) {
-      // console.log('watch photoNumber, nextPhotoNumber:', nextPhotoNumber);
+      console.log('watch photoNumber, nextPhotoNumber:', nextPhotoNumber);
+      this.photoDate = this.pictures[nextPhotoNumber].date;
       this.imgsrc = './images/spinner3.png';
       let myImage = new Image();
-      myImage.src = this.pictures[this.photoNumber].url;
+      myImage.src = this.pictures[nextPhotoNumber].url;
       myImage.onload = () => {
         this.imgsrc = myImage.src;
       };
     },
   },
   mounted() {
+    this.photoDate = this.pictures[this.photoNumber].date;
     this.imgsrc = './images/spinner3.png';
     let myImage = new Image();
     myImage.src = this.pictures[this.photoNumber].url;

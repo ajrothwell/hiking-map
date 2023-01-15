@@ -6,14 +6,12 @@
     "local": "vue-cli-service serve --mode local",
     "serve": "vue-cli-service serve",
     "build:development": "vue-cli-service build --mode development",
-    "build:development2": "vue-cli-service build --mode development2",
-    "build:development3": "vue-cli-service build --mode development3",
     "build:production": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "lintFix": "vue-cli-service lint --fix"
   },
   "dependencies": {
-    "@phila/pinboard": "https://github.com/CityOfPhiladelphia/pinboard#0d6dc9417d59bd7e4d4ea98f1808cdd1c340aca3",
+    "@phila/pinboard": "https://github.com/CityOfPhiladelphia/pinboard#29f4f5c4fea2b551f676076eae4acc1f9060ded3",
     "bulma": "^0.9.1",
     "core-js": "^3.3.3",
     "vue": "^2.6.10"

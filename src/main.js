@@ -32,8 +32,17 @@ library.add(faExclamationTriangle, faCalendarAlt, faBuilding, faUserMd, faCircle
 // import pinboard
 import pinboard from '@phila/pinboard/src/main.js';
 
+import legendControls from './general/legendControls';
+
 // data-sources
-import hikes from './data-sources/hikes';
+import compiled from './data-sources/compiled';
+import jennie from './data-sources/jennie';
+import jessie from './data-sources/jessie';
+import andy from './data-sources/andy';
+import lizzie from './data-sources/lizzie';
+import teresa from './data-sources/teresa';
+import kiyo from './data-sources/kiyo';
+
 
 import expandCollapseContent from './components/ExpandCollapseContent.vue';
 // import customGreeting from './components/customGreeting.vue';
@@ -45,47 +54,14 @@ const customComps = {
 import '@creativebulma/bulma-tooltip/dist/bulma-tooltip.min.css';
 
 pinboard({
-  alerts: {
-    modal: {
-      enabled: false,
-      // header: 'Possible closures',
-      // body: '<p>All City-run COVID-19 testing sites and health centers are open and on a normal schedule, though others may be closed. Please call ahead to ensure that the site you are going to is open.</p>',
-      header: 'Before you go',
-      body: '<p>Some test sites may be closed due to winter weather conditions.  Always call ahead before you go to a site.</p>',
-    },
-    // header: {
-    //   type: 'alertBanner',
-    //   // enabled: function(state) {
-    //   //   return state.alertResponse === 'alertHours';
-    //   // },
-    //   // content: '<b>Until further notice:</b> Please call ahead or check hours of operation while business restrictions are still in effect.',
-    // },
-    alertChecks: [
-      // {
-      //   type: 'alertHours',
-      //   condition: [
-      //     {
-      //       'day': 1,
-      //       'startTime': '1:00',
-      //       'endTime': '23:59',
-      //     },
-      //     {
-      //       'day': 2,
-      //       'startTime': '1:00',
-      //       'endTime': '23:59',
-      //     },
-      //   ],
-      // },
-    ],
-  },
   app: {
     title: 'Outdoor Places',
     logoAlt: 'logo',
-    type: 'hikes',
+    type: 'compiled',
+    categorizeCompiled: true,
     trustedSite: 'hidden',
     skipGreeting: true,
   },
-  // resetDataOnGeocode: true,
   retractableRefine: false,
   dropdownRefine: false,
   searchBar: {
@@ -105,17 +81,18 @@ pinboard({
     },
   },
   customComps,
-  // baseConfig: BASE_CONFIG_URL,
-  // holidays: {
-  //   days: ['Monday'],
-  // },
-  // hiddenRefine: {
-  //   City: function(item) {
-  //     return item.attributes.City === 'Philadelphia';
-  //   },
-  //   Visibility: function(item) {
-  //     return item.attributes.Visibility === 'pub' || item.attributes.Visibility === 'For Public View';
-  //   },
+  // refine: {
+  //   type: 'multipleFieldGroups',
+  //   columns: true,
+  //   multipleFieldGroups: {
+  //     state: {
+  //       checkbox: {
+  //         value: function(item) {
+  //           console.log('state checkbox, item:', item);
+  //         }
+  //       }
+  //     }
+  //   }
   // },
   refine: {
     type: 'categoryField_array',
@@ -126,7 +103,14 @@ pinboard({
   },
   markerType: 'circle-marker',
   circleMarkers:{
-    color: '#ff781f',
+    circleColors: {
+      'jennie': '#ff5512',
+      'jessie': '#32a6a8',
+      'andy': '#ffa812',
+      'lizzie': '#f7f42d',
+      'teresa': '#d834eb',
+      'kiyo': '#f5abe1',
+    },
     selectedColor: '#FF0000',
     weight: 0,
     radius: 8,
@@ -134,6 +118,7 @@ pinboard({
     size: 10,
     mobileSize: 20,
   },
+  legendControls,
   cyclomedia: {
     enabled: false,
     measurementAllowed: false,
@@ -144,7 +129,13 @@ pinboard({
     apiKey: process.env.VUE_APP_CYCLOMEDIA_API_KEY,
   },
   dataSources: {
-    hikes,
+    compiled,
+    jennie,
+    jessie,
+    andy,
+    lizzie,
+    teresa,
+    kiyo,
   },
   router: {
     enabled: false,
@@ -188,11 +179,11 @@ pinboard({
     tiles: 'hosted',
     containerClass: 'map-container',
     defaultBasemap: 'pwd',
-    center: [ -75.163471, 39.953338 ],
-    minZoom: 7,
+    center: [ -95.973245, 38.954652 ],
+    minZoom: 2,
     maxZoom: 25,
     shouldInitialize: true,
-    zoom: 7,
+    zoom: 3,
     geocodeZoom: 15,
     imagery: {
       enabled: false,
