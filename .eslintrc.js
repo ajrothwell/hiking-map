@@ -37,6 +37,9 @@ module.exports = {
     "vue/attributes-order": "error",
     "vue/no-unused-components": "off",
     "vue/no-side-effects-in-computed-properties": "off",
+
+    // other
+    "no-unexpected-multiline": "off",
   },
   parserOptions: {
     parser: "babel-eslint",
