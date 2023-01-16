@@ -62,7 +62,7 @@ pinboard({
     trustedSite: 'hidden',
     skipGreeting: true,
   },
-  retractableRefine: false,
+  retractableRefine: true,
   dropdownRefine: false,
   searchBar: {
     hide: true,

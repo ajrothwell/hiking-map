@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content">
+  <div>
     <div>
       Town/City: {{ item.fields.Town }}<br>
       State: {{ item.fields.State }}
@@ -23,7 +23,7 @@
     </div>
 
     <div class="columns is-vcentered is-mobile">
-      <div class="column is-2 is-offset-4 has-text-centered">
+      <div class="column is-2 is-offset-3 has-text-centered">
         <button
           v-show="photoNumber+1>1"
           class="button square-button"
@@ -33,7 +33,7 @@
         </button>
       </div>
 
-      <div class="column is-2 has-text-centered">
+      <div class="column is-2 is-offset-2 has-text-centered">
         <button
           v-show="picsLength && photoNumber+1<picsLength"
           class="button square-button"
