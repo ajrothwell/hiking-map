@@ -55,7 +55,7 @@ import '@creativebulma/bulma-tooltip/dist/bulma-tooltip.min.css';
 
 pinboard({
   app: {
-    title: 'Outdoor Places',
+    title: 'Rothwell Family Pin Map',
     logoAlt: 'logo',
     type: 'compiled',
     categorizeCompiled: true,

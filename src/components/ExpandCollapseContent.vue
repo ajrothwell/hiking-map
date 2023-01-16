@@ -4,8 +4,26 @@
       Town/City: {{ item.fields.Town }}<br>
       State: {{ item.fields.State }}
     </div>
+    
+    <div
+      v-if="picsLength"
+      class="has-text-centered"
+    >
+      <div
+        class="image-div"
+      >
+        <img :src="imgsrc">
+      </div>
+    </div>
+    <div
+      v-if="!picsLength"
+      class="has-text-centered"
+    >
+      No photos
+    </div>
+
     <div class="columns is-vcentered is-mobile">
-      <div class="column is-2 has-text-centered">
+      <div class="column is-2 is-offset-4 has-text-centered">
         <button
           v-show="photoNumber+1>1"
           class="button square-button"
@@ -14,23 +32,7 @@
           <font-awesome-icon icon="arrow-left" />
         </button>
       </div>
-      <div
-        v-if="picsLength"
-        class="column is-8 has-text-centered"
-      >
-        <div
-          class="image-div"
-        >
-          <img :src="imgsrc">
-        </div>
-        Date: {{ photoDate }}
-      </div>
-      <div
-        v-if="!picsLength"
-        class="column is-8 has-text-centered"
-      >
-        No photos
-      </div>
+
       <div class="column is-2 has-text-centered">
         <button
           v-show="picsLength && photoNumber+1<picsLength"
@@ -40,6 +42,10 @@
           <font-awesome-icon icon="arrow-right" />
         </button>
       </div>
+    </div>
+
+    <div class="has-text-centered">
+      Date: {{ photoDate }}
     </div>
   </div>
 </template>
