@@ -41,6 +41,7 @@ import jessie from './data-sources/jessie';
 import andy from './data-sources/andy';
 import andy_pictures from './data-sources/andy_pictures';
 import lizzie from './data-sources/lizzie';
+import lizzie_pictures from './data-sources/lizzie_pictures';
 import teresa from './data-sources/teresa';
 import kiyo from './data-sources/kiyo';
 
@@ -136,6 +137,7 @@ pinboard({
     andy,
     andy_pictures,
     lizzie,
+    lizzie_pictures,
     teresa,
     kiyo,
   },
