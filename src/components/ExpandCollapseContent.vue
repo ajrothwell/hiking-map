@@ -47,6 +47,9 @@
     <div class="has-text-centered">
       Date: {{ photoDate }}
     </div>
+    <div class="has-text-centered">
+      {{ photoCaption }}
+    </div>
   </div>
 </template>
 
@@ -68,31 +71,24 @@ export default {
     return {
       photoNumber: 0,
       photoDate: null,
+      photoCation: null,
       imgsrc: null,
     };
   },
   computed: {
+    person() {
+      let person = this.item._featureId.split('-')[1];
+      return person;
+    },
     allPics() {
-      let allPics = {};
-      for (let i=0; i<10; i++) {
-        if (this.item.fields['Date'+i]) {
-          this.item.fields['PicsDate'+i]['date'] = this.item.fields['Date'+i];
-          allPics[this.item.fields['Date'+i]] = this.item.fields['PicsDate'+i];
-        }
-      }
-      return allPics;
+      return this.$store.state.sources[this.person+'_pictures'].data.records;
+    },
+    itemPictures() {
+      return this.item.fields.pictures;
     },
     pictures() {
-      let pictures = [];
-      for (let pics of Object.keys(this.allPics)) {
-        // console.log('in pictures, pics:', pics);
-        for (let pic of this.allPics[pics]) {
-          console.log('in pictures, this.allPics[pics]:', this.allPics[pics], 'pic:', pic);
-          pic.date = pics;
-          pictures.push(pic);
-        }
-      }
-      return pictures;
+      let pics = this.allPics.filter(x => this.itemPictures.includes(x.id));
+      return pics;
     },
     picsLength() {
       return this.pictures.length;
@@ -101,20 +97,22 @@ export default {
   watch: {
     photoNumber(nextPhotoNumber) {
       console.log('watch photoNumber, nextPhotoNumber:', nextPhotoNumber);
-      this.photoDate = this.pictures[nextPhotoNumber].date;
+      this.photoDate = this.pictures[nextPhotoNumber].fields.date;
+      this.photoCaption = this.pictures[this.photoNumber].fields.caption;
       this.imgsrc = './images/spinner3.png';
       let myImage = new Image();
-      myImage.src = this.pictures[nextPhotoNumber].url;
+      myImage.src = this.pictures[nextPhotoNumber].fields.picture[0].url;
       myImage.onload = () => {
         this.imgsrc = myImage.src;
       };
     },
   },
   mounted() {
-    this.photoDate = this.pictures[this.photoNumber].date;
+    this.photoDate = this.pictures[this.photoNumber].fields.date;
+    this.photoCaption = this.pictures[this.photoNumber].fields.caption;
     this.imgsrc = './images/spinner3.png';
     let myImage = new Image();
-    myImage.src = this.pictures[this.photoNumber].url;
+    myImage.src = this.pictures[this.photoNumber].fields.picture[0].url;
     myImage.onload = () => {
       this.imgsrc = myImage.src;
     };
