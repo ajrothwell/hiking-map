@@ -39,13 +39,16 @@ import compiled from './data-sources/compiled';
 import jennie from './data-sources/jennie';
 import jennie_pictures_01 from './data-sources/jennie_pictures_01';
 import jessie from './data-sources/jessie';
+import jessie_pictures_01 from './data-sources/jessie_pictures_01';
 import andy from './data-sources/andy';
 import andy_pictures_01 from './data-sources/andy_pictures_01';
 import andy_pictures_02 from './data-sources/andy_pictures_02';
 import lizzie from './data-sources/lizzie';
 import lizzie_pictures_01 from './data-sources/lizzie_pictures_01';
 import teresa from './data-sources/teresa';
+import teresa_pictures_01 from './data-sources/teresa_pictures_01';
 import kiyo from './data-sources/kiyo';
+import kiyo_pictures_01 from './data-sources/kiyo_pictures_01';
 
 
 import expandCollapseContent from './components/ExpandCollapseContent.vue';
@@ -137,13 +140,16 @@ pinboard({
     jennie,
     jennie_pictures_01,
     jessie,
+    jessie_pictures_01,
     andy,
     andy_pictures_01,
     andy_pictures_02,
     lizzie,
     lizzie_pictures_01,
     teresa,
+    teresa_pictures_01,
     kiyo,
+    kiyo_pictures_01,
   },
   router: {
     enabled: false,
