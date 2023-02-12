@@ -37,12 +37,13 @@ import legendControls from './general/legendControls';
 // data-sources
 import compiled from './data-sources/compiled';
 import jennie from './data-sources/jennie';
+import jennie_pictures_01 from './data-sources/jennie_pictures_01';
 import jessie from './data-sources/jessie';
 import andy from './data-sources/andy';
 import andy_pictures_01 from './data-sources/andy_pictures_01';
 import andy_pictures_02 from './data-sources/andy_pictures_02';
 import lizzie from './data-sources/lizzie';
-import lizzie_pictures from './data-sources/lizzie_pictures';
+import lizzie_pictures_01 from './data-sources/lizzie_pictures_01';
 import teresa from './data-sources/teresa';
 import kiyo from './data-sources/kiyo';
 
@@ -134,12 +135,13 @@ pinboard({
   dataSources: {
     compiled,
     jennie,
+    jennie_pictures_01,
     jessie,
     andy,
     andy_pictures_01,
     andy_pictures_02,
     lizzie,
-    lizzie_pictures,
+    lizzie_pictures_01,
     teresa,
     kiyo,
   },

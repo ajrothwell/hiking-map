@@ -2,12 +2,16 @@ export default {
   id: 'hikes',
   type: 'http-get',
   dependent: 'none',
+  deps: [ 'sources.andy_pictures_01' ],
   resettable: false,
   compile: false,
   url: 'https://api.airtable.com/v0/appqasIqir5SS0S9s/andy_pictures?api_key=' + process.env.VUE_APP_AIRTABLE_API_KEY,
   options: {
     params: {
-      offset: 'itrOH34m4vwAH3Xr5/recrrSlBNiWx5yKvN',
+      offset: function(feature, state) {
+        // console.log('state.sources.andy_pictures_01.data:', state.sources.andy_pictures_01.data);
+        return state.sources.andy_pictures_01.data.offset;
+      },
     },
   },
 };

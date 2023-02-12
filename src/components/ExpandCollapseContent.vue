@@ -82,13 +82,15 @@ export default {
     },
     allPics() {
       let pics;
-      if (this.$store.state.sources[this.person+'_pictures']) {
-        pics = this.$store.state.sources[this.person+'_pictures'].data.records;
-      }
+      // if (this.$store.state.sources[this.person+'_pictures']) {
+      //   pics = this.$store.state.sources[this.person+'_pictures'].data.records;
+      // }
       if (this.$store.state.sources[this.person+'_pictures_01']) {
-        let pics_01 = this.$store.state.sources[this.person+'_pictures_01'].data.records;
+        pics = this.$store.state.sources[this.person+'_pictures_01'].data.records;
+      }
+      if (this.$store.state.sources[this.person+'_pictures_02']) {
         let pics_02 = this.$store.state.sources[this.person+'_pictures_02'].data.records;
-        pics = pics_01.concat(pics_02);
+        pics.concat(pics_02);
       }
       return pics;
     },
