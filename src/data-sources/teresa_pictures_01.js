@@ -3,7 +3,7 @@ export default {
   type: 'http-get',
   dependent: 'none',
   resettable: false,
-  compile: true,
+  compile: false,
   url: 'https://api.airtable.com/v0/appkJBVxansuDDzpu/teresa_pictures?api_key=' + process.env.VUE_APP_AIRTABLE_API_KEY,
   options: {
     params: {
