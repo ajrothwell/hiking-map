@@ -90,7 +90,7 @@ export default {
       }
       if (this.$store.state.sources[this.person+'_pictures_02']) {
         let pics_02 = this.$store.state.sources[this.person+'_pictures_02'].data.records;
-        pics.concat(pics_02);
+        pics = pics.concat(pics_02);
       }
       return pics;
     },
