@@ -71,7 +71,7 @@ export default {
     return {
       photoNumber: 0,
       photoDate: null,
-      photoCation: null,
+      photoCaption: null,
       imgsrc: null,
     };
   },
