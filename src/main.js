@@ -69,6 +69,8 @@ pinboard({
     trustedSite: 'hidden',
     skipGreeting: true,
   },
+  allowPrint: true,
+  showBuffers: false,
   retractableRefine: true,
   dropdownRefine: false,
   searchBar: {
