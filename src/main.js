@@ -43,6 +43,7 @@ import jessie_pictures_01 from './data-sources/jessie_pictures_01';
 import andy from './data-sources/andy';
 import andy_pictures_01 from './data-sources/andy_pictures_01';
 import andy_pictures_02 from './data-sources/andy_pictures_02';
+import andy_pictures_03 from './data-sources/andy_pictures_03';
 import lizzie from './data-sources/lizzie';
 import lizzie_pictures_01 from './data-sources/lizzie_pictures_01';
 import teresa from './data-sources/teresa';
@@ -144,6 +145,7 @@ pinboard({
     andy,
     andy_pictures_01,
     andy_pictures_02,
+    andy_pictures_03,
     lizzie,
     lizzie_pictures_01,
     teresa,

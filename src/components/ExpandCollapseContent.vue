@@ -92,6 +92,10 @@ export default {
         let pics_02 = this.$store.state.sources[this.person+'_pictures_02'].data.records;
         pics = pics.concat(pics_02);
       }
+      if (this.$store.state.sources[this.person+'_pictures_03']) {
+        let pics_03 = this.$store.state.sources[this.person+'_pictures_03'].data.records;
+        pics = pics.concat(pics_03);
+      }
       return pics;
     },
     itemPictures() {
