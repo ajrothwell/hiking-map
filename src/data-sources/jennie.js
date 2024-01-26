@@ -4,9 +4,12 @@ export default {
   dependent: 'none',
   resettable: false,
   compile: true,
-  url: 'https://api.airtable.com/v0/app3baMd88ZTNQrTy/jennie?api_key=' + process.env.VUE_APP_AIRTABLE_API_KEY,
+  url: 'https://api.airtable.com/v0/app3baMd88ZTNQrTy/jennie',
   options: {
     params: {
+    },
+    headers: {
+      'Authorization': 'Bearer ' + process.env.VUE_APP_AIRTABLE_ACCESS_TOKEN,
     },
   },
 };
